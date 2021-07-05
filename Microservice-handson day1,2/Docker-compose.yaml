@@ -13,7 +13,8 @@ services:
     #ENVIRONMENTS ARE GIVEN AS PER THE APPLICATION.PROPERTIES FILE
     #DEPENDS ON EUREKA SAYS THAT THIS APPLICATION ALWAYS RUN AFTER EUREKA SERVER STARTS
     account:
-        image: account
+      #NAME ACCORDING TO APPLICATION>PROPERTIES
+        image: account-service
         ports: 
             - "8080:8080"
         restart: always
@@ -30,7 +31,8 @@ services:
     #ENVIRONMENTS ARE GIVEN AS PER THE APPLICATION.PROPERTIES FILE
     #DEPENDS ON EUREKA SAYS THAT THIS APPLICATION ALWAYS RUN AFTER EUREKA SERVER STARTS
     loan:
-        image: loan
+        #image: loan
+        image: loan-service
         ports: 
             - "8081:8081"
         restart: always
@@ -45,7 +47,8 @@ services:
     #ENVIRONMENTS ARE GIVEN AS PER THE APPLICATION.PROPERTIES FILE
     #DEPENDS ON EUREKA SAYS THAT THIS APPLICATION ALWAYS RUN AFTER EUREKA SERVER STARTS
     zuul-gate:
-        image: zuul-gate
+        #image: zuul-gate
+        image: zuul-gate-service
         ports: 
             - "8083:8083"
         restart: always
