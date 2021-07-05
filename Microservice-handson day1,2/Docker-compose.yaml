@@ -1,0 +1,62 @@
+version: '3.7'
+services: 
+   #IMAGE SHOULD SAME AS WRITTEN IN DOCKER IMAGES SO CHECK AND WRITE
+    eureka-server:
+        image: eureka-server
+        ports: 
+            - "8761:8761"
+        restart: always
+       
+        networks:
+            - app-network
+    #IMAGE SHOULD SAME AS WRITTEN IN DOCKER IMAGES SO CHECK AND WRITE
+    #ENVIRONMENTS ARE GIVEN AS PER THE APPLICATION.PROPERTIES FILE
+    #DEPENDS ON EUREKA SAYS THAT THIS APPLICATION ALWAYS RUN AFTER EUREKA SERVER STARTS
+    account:
+        image: account
+        ports: 
+            - "8080:8080"
+        restart: always
+        environment:
+            EUREKA_HOST: eureka-server
+            EUREKA_PORT: 8761
+                
+        depends_on:
+            - eureka-server
+        networks:
+            - app-network
+     #IMAGE SHOULD SAME AS WRITTEN IN DOCKER IMAGES SO CHECK AND WRITE
+    
+    #ENVIRONMENTS ARE GIVEN AS PER THE APPLICATION.PROPERTIES FILE
+    #DEPENDS ON EUREKA SAYS THAT THIS APPLICATION ALWAYS RUN AFTER EUREKA SERVER STARTS
+    loan:
+        image: loan
+        ports: 
+            - "8081:8081"
+        restart: always
+        environment:
+            EUREKA_HOST: eureka-server
+            EUREKA_PORT: 8761
+        depends_on:
+            - eureka-server
+        networks:
+            - app-network
+    #IMAGE SHOULD SAME AS WRITTEN IN DOCKER IMAGES SO CHECK AND WRITE
+    #ENVIRONMENTS ARE GIVEN AS PER THE APPLICATION.PROPERTIES FILE
+    #DEPENDS ON EUREKA SAYS THAT THIS APPLICATION ALWAYS RUN AFTER EUREKA SERVER STARTS
+    zuul-gate:
+        image: zuul-gate
+        ports: 
+            - "8083:8083"
+        restart: always
+        environment:
+            EUREKA_HOST: eureka-server
+            EUREKA_PORT: 8761
+        depends_on:
+            - eureka-server
+        networks:
+            - app-network
+    
+# Networks to be created to facilitate communication between containers
+networks:
+    app-network:  
