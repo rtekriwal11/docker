@@ -2,7 +2,7 @@ version: '3.7'
 services: 
    #IMAGE SHOULD SAME AS WRITTEN IN DOCKER IMAGES SO CHECK AND WRITE
     eureka-server:
-        image: eureka-server
+        image: eureka-server-service
         ports: 
             - "8761:8761"
         restart: always
@@ -16,7 +16,7 @@ services:
       #NAME ACCORDING TO APPLICATION>PROPERTIES
         image: account-service
         ports: 
-            - "8080:8080"
+            - "8079-8080:8080"
         restart: always
         environment:
             EUREKA_HOST: eureka-server
@@ -34,7 +34,7 @@ services:
         #image: loan
         image: loan-service
         ports: 
-            - "8081:8081"
+            - "8081-8082:8081"
         restart: always
         environment:
             EUREKA_HOST: eureka-server
